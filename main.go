@@ -13,7 +13,7 @@ import (
 	"time"
 
 	"golang.org/x/oauth2/clientcredentials"
-	"tailscale.com/client/tailscale/v2"
+	tailscale "github.com/tailscale/tailscale-client-go/v2"
 )
 
 type Config map[string][]string

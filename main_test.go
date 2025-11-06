@@ -10,7 +10,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"tailscale.com/client/tailscale/v2"
+	tailscale "github.com/tailscale/tailscale-client-go/v2"
 )
 
 func TestLoadConfig(t *testing.T) {

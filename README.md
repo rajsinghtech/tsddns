@@ -157,7 +157,7 @@ docker run -d \
   -v /path/to/config.json:/config/config.json:ro \
   -e TAILSCALE_CLIENT_ID="your-client-id" \
   -e TAILSCALE_CLIENT_SECRET="your-client-secret" \
-  tsddns --interval 5m
+  ghcr.io/rajsinghtech/tsddns:latest --interval 5m
 ```
 
 ## License

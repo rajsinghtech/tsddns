@@ -6,13 +6,19 @@ ARG TARGETARCH
 
 WORKDIR /build
 
+RUN apk add --no-cache git
+
 COPY go.mod go.sum ./
-COPY vendor/ vendor/
+
+RUN --mount=type=cache,target=/go/pkg/mod \
+    go mod download
+
 COPY *.go ./
 
-RUN --mount=type=cache,target=/root/.cache/go-build \
+RUN --mount=type=cache,target=/go/pkg/mod \
+    --mount=type=cache,target=/root/.cache/go-build \
     CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH:-amd64} \
-    go build -mod=vendor -ldflags="-w -s" -trimpath -o tsddns .
+    go build -ldflags="-w -s" -trimpath -o tsddns .
 
 FROM alpine:latest
 

@@ -17,7 +17,7 @@ go.work
 go.work.sum
 
 # Dependency directories
-# Note: vendor/ is committed for Docker builds
+vendor/
 
 # IDE files
 .vscode/
