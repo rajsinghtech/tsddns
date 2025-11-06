@@ -16,26 +16,6 @@ go mod download
 go build -o tsddns
 ```
 
-## Development
-
-### Running Tests
-
-```bash
-go test -v -cover
-```
-
-### Running Tests with Race Detection
-
-```bash
-go test -v -race -coverprofile=coverage.out
-```
-
-### View Coverage Report
-
-```bash
-go tool cover -html=coverage.out
-```
-
 ## Configuration
 
 Create a `config.json` file mapping domains to nameservers. Nameservers can be:
@@ -127,14 +107,6 @@ Required scopes:
 2024/01/15 10:00:00   internal.example.com -> [192.168.1.1 100.64.0.5]
 2024/01/15 10:00:00   other.com -> [100.64.0.2]
 2024/01/15 10:00:00 Successfully updated split DNS configuration
-```
-
-## Running as a Daemon
-
-To run continuously and update DNS at regular intervals:
-
-```bash
-./tsddns --interval 5m
 ```
 
 This will update split DNS immediately on start, then every 5 minutes thereafter.
