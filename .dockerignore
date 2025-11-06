@@ -1,0 +1,43 @@
+# Binaries
+tsddns
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+go.work.sum
+
+# Dependency directories
+# Note: We actually need vendor/ for Docker builds
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# GitHub
+.github
+
+# Documentation
+README.md
+*.md
+
+# Config files (will be mounted)
+config.json
