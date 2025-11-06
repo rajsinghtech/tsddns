@@ -131,7 +131,3 @@ docker run -d \
   -e TAILSCALE_CLIENT_SECRET="your-client-secret" \
   ghcr.io/rajsinghtech/tsddns:latest --interval 5m
 ```
-
-## License
-
-MIT
