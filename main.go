@@ -51,14 +51,15 @@ func main() {
 		ticker := time.NewTicker(*interval)
 		defer ticker.Stop()
 
-		if err := updateDNS(ctx, client, cfg); err != nil {
-			log.Printf("Error updating DNS: %v", err)
-		}
-
-		for range ticker.C {
+		runUpdate := func() {
 			if err := updateDNS(ctx, client, cfg); err != nil {
 				log.Printf("Error updating DNS: %v", err)
 			}
+		}
+
+		runUpdate()
+		for range ticker.C {
+			runUpdate()
 		}
 	} else {
 		if err := updateDNS(ctx, client, cfg); err != nil {
@@ -228,25 +229,12 @@ func getServiceIP(ctx context.Context, client *tailscale.Client, serviceName str
 
 func getDeviceIP(hostname string, devices []tailscale.Device) (string, error) {
 	for _, device := range devices {
-		if device.Hostname == hostname {
-			if len(device.Addresses) == 0 {
-				return "", fmt.Errorf("device %s has no addresses", hostname)
-			}
-			return device.Addresses[0], nil
-		}
-		if strings.HasPrefix(device.Name, hostname+".") {
-			if len(device.Addresses) == 0 {
-				return "", fmt.Errorf("device %s has no addresses", hostname)
-			}
-			return device.Addresses[0], nil
-		}
-		if device.Name == hostname {
+		if device.Hostname == hostname || device.Name == hostname || strings.HasPrefix(device.Name, hostname+".") {
 			if len(device.Addresses) == 0 {
 				return "", fmt.Errorf("device %s has no addresses", hostname)
 			}
 			return device.Addresses[0], nil
 		}
 	}
-
 	return "", fmt.Errorf("device %s not found", hostname)
 }

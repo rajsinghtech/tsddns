@@ -12,7 +12,6 @@ Supports:
 ## Installation
 
 ```bash
-go mod download
 go build -o tsddns
 ```
 
